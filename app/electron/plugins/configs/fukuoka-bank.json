@@ -1,0 +1,47 @@
+{
+  "id": "fukuoka-bank",
+  "name": "福岡銀行",
+  "description": "福岡銀行 入出金明細CSV",
+  "format": "csv",
+  "encoding": "Shift_JIS",
+  "delimiter": ",",
+  "skipRows": 5,
+  "hasHeader": true,
+  "supportedExtensions": [
+    "csv",
+    "CSV"
+  ],
+  "columns": {
+    "date": {
+      "index": 0
+    },
+    "description": {
+      "index": 1
+    },
+    "income": {
+      "index": 3
+    },
+    "expense": {
+      "index": 2
+    },
+    "balance": {
+      "index": 4
+    }
+  },
+  "targetSheet": "福岡銀行",
+  "defaultDebitAccount": "普通預金",
+  "defaultDebitSubAccount": "福岡銀行",
+  "defaultCreditAccount": "普通預金",
+  "defaultCreditSubAccount": "福岡銀行",
+  "mappingRules": [
+    {
+      "keyword": "住宅",
+      "debitAccount": "地代家賃"
+    },
+    {
+      "keyword": "カード",
+      "debitAccount": "事業主借"
+    }
+  ],
+  "hasOpeningBalance": true
+}

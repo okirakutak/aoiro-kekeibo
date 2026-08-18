@@ -1,0 +1,3 @@
+"Creation Date",Currency,"Direct Debit Refund Amount","Disbursement Type","Order ID","Payment Status",Quantity,"Refund Amount","Refund Date","Reversal Amount State","Reversal Reason","Reversal Status",Website
+2014-06-01T10:10:04Z,JPY,0,Refund,503-8382284-3663013,Completed,1,998,2014-06-01T12:52:24Z,Final,"Item out of stock",Completed,Amazon.co.jp
+2021-10-25T04:01:26.366Z,JPY,0,Refund,249-5773591-8825400,Completed,1,654,2021-10-25T07:23:19.704Z,Final,"Order cancelled",Completed,Amazon.co.jp

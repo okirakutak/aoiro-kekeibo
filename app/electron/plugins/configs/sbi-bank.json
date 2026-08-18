@@ -1,0 +1,47 @@
+{
+  "id": "sbi-bank",
+  "name": "住信SBI銀行",
+  "description": "住信SBIネット銀行 入出金明細CSV（複数月ファイル対応）",
+  "format": "csv",
+  "encoding": "Shift_JIS",
+  "delimiter": ",",
+  "skipRows": 0,
+  "hasHeader": true,
+  "multiFile": true,
+  "supportedExtensions": [
+    "csv"
+  ],
+  "columns": {
+    "date": {
+      "index": 0
+    },
+    "description": {
+      "index": 1
+    },
+    "expense": {
+      "index": 2
+    },
+    "income": {
+      "index": 3
+    },
+    "balance": {
+      "index": 4
+    }
+  },
+  "targetSheet": "住信SBI銀行",
+  "defaultDebitAccount": "普通預金",
+  "defaultDebitSubAccount": "住信SBI銀行",
+  "defaultCreditAccount": "普通預金",
+  "defaultCreditSubAccount": "住信SBI銀行",
+  "mappingRules": [
+    {
+      "keyword": "振込",
+      "debitAccount": "事業主借"
+    },
+    {
+      "keyword": "ATM",
+      "debitAccount": "事業主借"
+    }
+  ],
+  "hasOpeningBalance": true
+}

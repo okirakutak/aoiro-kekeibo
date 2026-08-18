@@ -1,0 +1,26 @@
+{
+  "id": "aliexpress",
+  "name": "AliExpress",
+  "description": "AliExpress注文履歴HTML",
+  "format": "html",
+  "encoding": "UTF-8",
+  "supportedExtensions": [
+    "html",
+    "htm"
+  ],
+  "multiFile": true,
+  "selectors": {
+    "row": "div.order-item",
+    "description": "div.order-item-content-info-name a, a[data-pl='product_name']",
+    "amount": "div.order-item-content-opt-price-total span, span.order-item-content-opt-price-total",
+    "dateText": "div.order-item-header-right-info"
+  },
+  "datePattern": "Order date:\\s*([A-Za-z]+ \\d{1,2},? \\d{4})",
+  "amountPattern": "[\\d,.]+",
+  "targetSheet": "AliExpress",
+  "defaultDebitAccount": "消耗品費",
+  "defaultCreditAccount": "事業主借",
+  "mappingRules": [],
+  "hasOpeningBalance": false,
+  "sheetLayout": "credit-card"
+}

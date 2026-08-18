@@ -1,0 +1,558 @@
+
+  #msthd #mhd_uhd_pc {
+    display: inline-block;
+    height: 32px;
+    line-height: 32px;
+  }
+#msthd #mhd_uhd_pc .compo {
+      display: inline-block;
+      width: 480px;
+    }
+#msthd #mhd_uhd_pc .txt {
+      padding: 0 0 0 10px;
+      margin: 0;
+      text-align: left;
+    }
+#msthd #msthdFifth .compo a {
+      display: block;
+      width: 100%;
+      text-decoration: none;
+      cursor: pointer;
+    }
+#msthd #msthdFifth .compo a::after {
+      display: block;
+      clear: both;
+      content: '';
+    }
+#msthd #msthdFifth .p0s0,
+    #msthd #msthdFifth .p0s1,
+    #msthd #msthdFifth .p1s0,
+    #msthd #msthdFifth .p1s1,
+    #msthd #msthdFifth .sb1p1,
+    #msthd #msthdFifth .sb1p0,
+    #msthd #msthdFifth .bpr2s0,
+    #msthd #msthdFifth .bpr2s1,
+    #msthd #msthdFifth .noLogin,
+    #msthd #msthdFifth .msthdCrm {
+      display: block;
+      width: 100%;
+      height: 32px;
+      overflow: hidden;
+      text-indent: 200%;
+      white-space: nowrap;
+      background-repeat: no-repeat;
+      background-position: 0 0;
+      background-size: 480px 32px;
+    }
+#msthd #msthdFifth .p0s0 {
+      background-image: url("https://s.yimg.jp/images/shp_edit/other/fc/mhd/npre_nw.png");
+    }
+#msthd #msthdFifth .p0s1 {
+      background-image: url("https://s.yimg.jp/images/shp_edit/other/fc/mhd/npre_k.png");
+    }
+#msthd #msthdFifth .p1s0 {
+      background-image: url("https://s.yimg.jp/images/shp_edit/other/fc/mhd/pre_nw.png");
+    }
+#msthd #msthdFifth .p1s1 {
+      background-image: url("https://s.yimg.jp/images/shp_edit/other/fc/mhd/pre_k.png");
+    }
+#msthd #msthdFifth .sb1p1 {
+      background-image: url("https://s.yimg.jp/images/shp_edit/other/fc/mhd/sb_pre.png");
+    }
+#msthd #msthdFifth .sb1p0 {
+      background-image: url("https://s.yimg.jp/images/shp_edit/other/fc/mhd/sb_npre.png");
+    }
+#msthd #msthdFifth .bpr2s0 {
+      background-image: url("https://s.yimg.jp/images/shp_edit/other/fc/mhd/sb_nw.png");
+    }
+#msthd #msthdFifth .bpr2s1 {
+      background-image: url("https://s.yimg.jp/images/shp_edit/other/fc/mhd/sb_k.png");
+    }
+#msthd #msthdFifth .noLogin {
+      background-image: url("https://s.yimg.jp/images/shp_edit/other/fc/mhd/nlogin.png");
+    }
+#msthd #mhd_text_pc {
+    display: inline-block;
+  }
+/* ショッピング */
+#msthd .msthdPrShpIcon {
+    display: inline-block;
+    min-height: 18px;
+    padding-left: 18px;
+    line-height: 1.5;
+    background-image: url("https://s.yimg.jp/c/icon/s/bsc/2.1/s/shopping40.png");
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: 16px 16px;
+  }
+/* カード */
+#msthd .msthdPrCardIcon {
+    display: inline-block;
+    min-height: 18px;
+    padding-left: 20px;
+    line-height: 1.5;
+    background-image: url("https://s.yimg.jp/c/icon/s/bsc/2.0/card40.png");
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: 18px 18px;
+  }
+/* マネー */
+#msthd .msthdPrMoneyIcon {
+    display: inline-block;
+    min-height: 18px;
+    padding-left: 22px;
+    line-height: 1.5;
+    background-image: url("https://s.yimg.jp/c/icon/s/bsc/2.0/money40.png");
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: 18px 18px;
+  }
+/* オークション */
+#msthd .msthdPrAucIcon {
+    display: inline-block;
+    min-height: 18px;
+    padding-left: 20px;
+    line-height: 1.5;
+    background-image: url("https://s.yimg.jp/c/icon/s/bsc/2.1/a/auctions40.png");
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: 18px 18px;
+  }
+#msthd #mhMain {
+    display: table;
+    padding: 0;
+    margin: 13px 0 0;
+  }
+#msthd #mhServiceLogo {
+    display: table-cell;
+    padding: 3px 10px 3px 5px;
+  }
+#msthd #mhInfos {
+    position: relative;
+    z-index: 1;
+    display: none;
+    height: 38px;
+    letter-spacing: -0.4em;
+    vertical-align: middle;
+  }
+#msthd #mhInfos div {
+      letter-spacing: normal;
+    }
+#msthd #mhInfos a:hover {
+      text-decoration: underline;
+    }
+#msthd #mhInfos::after {
+    display: table;
+    clear: both;
+    content: '';
+  }
+#msthd #mhLogin {
+    margin-right: 5px;
+  }
+#msthd #mhLogin,
+  #msthd #mhReg {
+    font-weight: bold;
+  }
+#msthd #mhUserIcon {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+            align-items: center;
+    margin: 0 10px;
+    vertical-align: middle;
+  }
+#msthd #mhUserIcon .msthdPremTxt {
+      display: inline-block;
+      padding: 0 0 0 18px;
+      color: #666;
+      background-image: url("https://s.yimg.jp/c/icon/s/bsc/2.0/premium40.png");
+      background-repeat: no-repeat;
+      background-position: left 0 top 1px;
+      background-size: 16px 16px;
+    }
+#msthd #mhUserIcon #mhUserIconLink {
+      display: inline-block;
+      padding: 1px;
+      margin-right: 10px;
+    }
+#msthd #mhUserIcon #mhUserIconLink.show-lyp {
+      margin-right: 7px;
+    }
+#msthd #mhUserIcon #mhdPremiumPcImg {
+      width: 45px;
+      height: 14px;
+    }
+#msthd #mhUserIconImg {
+    display: none;
+    vertical-align: bottom;
+    border-radius: 50%;
+  }
+#msthd #mhLoginUser {
+    display: none;
+    max-width: 225px;
+    margin: 0 10px 0 0;
+    vertical-align: middle;
+  }
+#msthd .mhUserInfo {
+    line-height: 19px;
+    vertical-align: middle;
+  }
+#msthd #mhPointArea {
+    display: inline-block;
+    vertical-align: middle;
+  }
+#msthd #mhRatelimitInfo {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+            align-items: flex-start;
+  }
+#msthd #mhRatelimit {
+    display: none;
+  }
+#msthd #mhPointDetail {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+  }
+#msthd #mhPointDetail .mhPointDetailTxt,
+    #msthd #mhPointDetail #mhPointDetailTxtWrap {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+              align-items: center;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+              justify-content: center;
+    }
+#msthd #mhPointDetail .mhPointDetailTxt:not(:last-of-type) {
+        margin-right: 20px;
+      }
+#msthd #mhPointDetail #mhIconWrap {
+      position: relative;
+      width: 17px;
+      height: 17px;
+      margin-left: 3px;
+      cursor: pointer;
+    }
+#msthd #mhPointDetail #mhPaypayRegisterDetail,
+    #msthd #mhPointDetail #mhPaypayAmount {
+      padding-left: 18px;
+      cursor: pointer;
+      background-image: url("https://s.yimg.jp/c/icon/s/bsc/2.0/paypay28.png");
+      background-repeat: no-repeat;
+      background-position: 0 center;
+      background-size: 14px 14px;
+    }
+#msthd #mhPointDetail #mhPaypayRegisterDetail:hover,
+    #msthd #mhPointDetail #mhPaypayAmount:hover,
+    #msthd #mhPointDetail #mhPaypayRegisterExtraDetail:hover,
+    #msthd #mhPointDetail #mhPaypayFullPriceShowDetail:hover {
+      text-decoration: underline;
+    }
+#msthd #mhPointDetail #mhPaypayRegisterTxt,
+    #msthd #mhPointDetail #mhPaypayBalanceTxt,
+    #msthd #mhPointDetail #mhPaypayRegisterExtraTxt,
+    #msthd #mhPointDetail #mhPaypayFullPriceShowTxt {
+      display: none;
+    }
+#msthd #mhPointDetail #mhPoint,
+    #msthd #mhPointDetail .mhPaypay {
+      display: inline-block;
+    }
+#msthd #mhPointDetail .mhAmountTxt.isShow {
+      visibility: visible;
+      opacity: 1;
+    }
+#msthd #mhPointDetail .mhAmountIcon {
+      padding: 0;
+      -webkit-appearance: none;
+              appearance: none;
+      cursor: pointer;
+      background-color: transparent;
+      border: none;
+    }
+#msthd #mhPointDetail .mhAmountTxt {
+      position: absolute;
+      top: -28px;
+      left: 100%;
+      box-sizing: border-box;
+      width: auto;
+      padding: 0 6px;
+      margin: auto;
+      font-size: 12px;
+      line-height: 22px;
+      color: #fff;
+      white-space: nowrap;
+      visibility: hidden;
+      background-color: rgb(0 0 0 / 73%);
+      opacity: 0;
+      -webkit-transition: all 0.2s 0.1s ease-in;
+      transition: all 0.2s 0.1s ease-in;
+      -webkit-transform: translate(-100%, 0);
+              transform: translate(-100%, 0);
+    }
+#msthd #mhPointDetail #mhPaypayAmountIcon {
+      display: none;
+    }
+#msthd #mhPointNotice {
+    margin-left: 5px;
+    font-weight: bold;
+    color: #f33;
+  }
+#msthd #mhUserName {
+    display: inline-block;
+    max-width: 220px;
+    overflow: hidden;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+#msthd #msthdPrLink {
+    margin: 0;
+  }
+/*
+  reset する内容
+  ・marginとpaddingを0にする。
+  ・list-styleはnoneにする。
+
+  以下のreset cssを参考に作成した。
+  https://github.com/nicolas-cusan/destyle.css/blob/master/destyle.css
+*/
+/* Lists (enumeration) */
+#msthd ul,
+  #msthd ol {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+#msthd li {
+    height: unset;
+    padding: 0;
+    margin: 0;
+  }
+/* Forms */
+#msthd button,
+  #msthd input,
+  #msthd optgroup,
+  #msthd select,
+  #msthd textarea {
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    text-align: inherit;
+    text-transform: inherit;
+    vertical-align: middle;
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+  }
+#msthd optgroup,
+  #msthd select {
+    outline: none;
+  }
+/* Tables */
+#msthd td,
+  #msthd th {
+    padding: 0;
+  }
+/* Vertical rhythm */
+#msthd p,
+  #msthd table,
+  #msthd blockquote,
+  #msthd address,
+  #msthd pre,
+  #msthd iframe,
+  #msthd form,
+  #msthd figure,
+  #msthd dl {
+    margin: 0;
+  }
+/* Headings */
+#msthd h1,
+  #msthd h2,
+  #msthd h3,
+  #msthd h4,
+  #msthd h5,
+  #msthd h6 {
+    margin: 0;
+  }
+/* Lists (definition) */
+#msthd dd {
+    margin-left: 0;
+  }
+/* Grouping content */
+#msthd hr {
+    margin: 0;
+  }
+#msthd {
+  width: 100%;
+  padding-bottom: 13px;
+  margin: 0 auto;
+  font-size: 13px;
+  text-align: left;
+}
+#msthd div,
+  #msthd p {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+#msthd a {
+    text-decoration: none;
+  }
+#msthd img {
+    vertical-align: middle;
+  }
+#msthd #mhHeadLine {
+    width: 100%;
+    height: 32px;
+    overflow: hidden;
+    background-color: #f7f7f8;
+  }
+#msthd #mhHeadLine::after {
+    display: table;
+    clear: both;
+    content: '';
+  }
+#msthd #mhLinkBox {
+    display: inline-block;
+    letter-spacing: -0.4em;
+  }
+#msthd #mhLinkBox li:last-child {
+      margin-right: 10px;
+    }
+#msthd #mhLinkBox li.msthdLinkYtop {
+      margin-right: 17px;
+    }
+#msthd #mhLinkYtop,
+  #msthd #mhLinkHelp {
+    display: inline-block;
+    margin-right: 12px;
+    letter-spacing: 0;
+  }
+#msthd #mhSearchLink {
+    display: inline-block;
+    float: right;
+    margin-right: 7px;
+    letter-spacing: -0.4em;
+  }
+#msthd #mhSearchLink::after {
+    display: block;
+    clear: both;
+    content: '';
+  }
+#msthd #mhSearchBox {
+    position: relative;
+    box-sizing: content-box;
+    display: inline-block;
+    height: 26px;
+    padding: 3px;
+  }
+#msthd #mhSearchBox form {
+      padding: 0;
+      margin: 0;
+    }
+#msthd #mhSearch {
+    font-size: 0;
+  }
+#msthd #mhSearch #pickupWord {
+      position: absolute;
+      top: 50%;
+      right: 31px;
+      box-sizing: border-box;
+      max-width: 110px;
+      padding: 0 4px 0 16px;
+      overflow: hidden;
+      font-size: 12px;
+      color: #03c; /* color-link-main */
+      text-overflow: ellipsis;
+      letter-spacing: normal;
+      white-space: nowrap;
+      background-color: white; /* color-bg-main */
+      border: 1px solid #ddd;
+      border-radius: 2px;
+      -webkit-transform: translateY(-50%);
+              transform: translateY(-50%);
+  }
+#msthd #mhSearch #pickupWord:hover {
+        text-decoration: none;
+        background-color: rgb(26 117 255 / 6%);
+      }
+#msthd #mhSearch #pickupWordImg {
+      position: absolute;
+      top: 50%;
+      left: 2px;
+      width: 14px;
+      height: 14px;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 14px;
+      -webkit-transform: translateY(-50%);
+              transform: translateY(-50%);
+    }
+#msthd #mhSearchInput {
+    box-sizing: border-box;
+    display: inline-block;
+    width: 192px;
+    height: 26px;
+    padding: 0 2px;
+    margin: 0;
+    font-family: sans-serif;
+    font-size: 12px;
+    line-height: 2;
+    vertical-align: baseline;
+    background-color: white;
+    border: 1px solid #999;
+    border-right: none;
+    border-radius: 0;
+  }
+#msthd .offLeft {
+    display: block;
+    height: 0;
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+  }
+#msthd #mhSearchBtn {
+    position: relative;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    font-family: initial;
+    font-size: 12px;
+    line-height: initial;
+    text-indent: 100%;
+    white-space: nowrap;
+    vertical-align: baseline;
+    cursor: pointer;
+    background-image: url("https://s.yimg.jp/images/templa/mhd/v2/images/btn_search_2x.png");
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: 26px 77px;
+    border: 0 solid;
+  }
+#msthd::after {
+  display: table;
+  clear: both;
+  content: '';
+}
+/* 876px以下になるとヘッダー上部の検索エリアが表示崩れを起こす為非表示とする */
+@media screen and (max-width: 876px) {
+    #msthd #mhSearchLink {
+      display: none;
+    }
+}

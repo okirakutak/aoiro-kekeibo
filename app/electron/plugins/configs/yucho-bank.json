@@ -1,0 +1,47 @@
+{
+  "id": "yucho-bank",
+  "name": "郵貯銀行",
+  "description": "ゆうちょ銀行 入出金明細CSV",
+  "format": "csv",
+  "encoding": "Shift_JIS",
+  "delimiter": ",",
+  "skipRows": 7,
+  "hasHeader": true,
+  "requireBalance": true,
+  "supportedExtensions": [
+    "csv"
+  ],
+  "columns": {
+    "date": {
+      "index": 0
+    },
+    "description": {
+      "index": [
+        4,
+        5
+      ],
+      "join": " "
+    },
+    "income": {
+      "index": 2
+    },
+    "expense": {
+      "index": 3
+    },
+    "balance": {
+      "index": 6
+    }
+  },
+  "targetSheet": "郵貯銀行",
+  "defaultDebitAccount": "普通預金",
+  "defaultDebitSubAccount": "郵貯銀行",
+  "defaultCreditAccount": "普通預金",
+  "defaultCreditSubAccount": "郵貯銀行",
+  "mappingRules": [
+    {
+      "keyword": "利子",
+      "debitAccount": "受取利息"
+    }
+  ],
+  "hasOpeningBalance": true
+}

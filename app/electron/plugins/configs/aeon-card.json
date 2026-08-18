@@ -1,0 +1,27 @@
+{
+  "id": "aeon-card",
+  "name": "イオンカード",
+  "description": "イオンカード利用明細CSV",
+  "format": "csv",
+  "encoding": "Shift_JIS",
+  "delimiter": ",",
+  "skipRows": 7,
+  "hasHeader": true,
+  "supportedExtensions": ["csv"],
+  "columns": {
+    "date": { "index": 0 },
+    "description": { "index": 2 },
+    "amount": { "index": 6 }
+  },
+  "paymentDateMeta": { "row": 2, "col": 1 },
+  "targetSheet": "イオンカード",
+  "sheetLayout": "credit-card",
+  "hasOpeningBalance": false,
+  "defaultDebitAccount": "消耗品費",
+  "defaultCreditAccount": "未払金",
+  "defaultCreditSubAccount": "イオンカード",
+  "mappingRules": [
+    { "keyword": "ETC", "debitAccount": "旅費交通費" },
+    { "keyword": "マックスバリュ", "debitAccount": "消耗品費" }
+  ]
+}

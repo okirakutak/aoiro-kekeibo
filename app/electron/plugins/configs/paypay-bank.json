@@ -1,0 +1,48 @@
+{
+  "id": "paypay-bank",
+  "name": "PayPay銀行",
+  "description": "PayPay銀行 入出金明細CSV",
+  "format": "csv",
+  "encoding": "Shift_JIS",
+  "delimiter": ",",
+  "skipRows": 0,
+  "hasHeader": true,
+  "supportedExtensions": [
+    "csv"
+  ],
+  "columns": {
+    "date": {
+      "index": [
+        0,
+        1,
+        2
+      ],
+      "join": "/",
+      "format": "YYYY/M/D"
+    },
+    "description": {
+      "index": 7
+    },
+    "income": {
+      "index": 9
+    },
+    "expense": {
+      "index": 8
+    },
+    "balance": {
+      "index": 10
+    }
+  },
+  "targetSheet": "PayPay銀行",
+  "defaultDebitAccount": "普通預金",
+  "defaultDebitSubAccount": "PayPay銀行",
+  "defaultCreditAccount": "普通預金",
+  "defaultCreditSubAccount": "PayPay銀行",
+  "mappingRules": [
+    {
+      "keyword": "利息",
+      "debitAccount": "受取利息"
+    }
+  ],
+  "hasOpeningBalance": true
+}

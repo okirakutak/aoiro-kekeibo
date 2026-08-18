@@ -1,0 +1,26 @@
+{
+  "id": "yahoo-payment",
+  "name": "Yahoo!かんたん決済",
+  "description": "ヤフオクのかんたん決済 支払い一覧HTML",
+  "format": "html",
+  "encoding": "EUC-JP",
+  "supportedExtensions": [
+    "html",
+    "htm"
+  ],
+  "multiFile": true,
+  "selectors": {
+    "row": "table.TablePayList tr:not(:first-child)",
+    "description": "h2",
+    "amount": "td:nth-child(2)",
+    "dateText": "p.info"
+  },
+  "datePattern": "取扱日：(\\d{4}/\\d{2}/\\d{2})",
+  "amountPattern": "[\\d,]+",
+  "targetSheet": "ヤフオク",
+  "defaultDebitAccount": "消耗品費",
+  "defaultCreditAccount": "事業主借",
+  "mappingRules": [],
+  "hasOpeningBalance": false,
+  "sheetLayout": "credit-card"
+}

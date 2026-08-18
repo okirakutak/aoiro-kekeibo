@@ -1,0 +1,24 @@
+{
+  "id": "amazon-orders",
+  "name": "Amazon注文履歴",
+  "description": "Amazonの注文履歴エクスポートCSV (Order History.csv)",
+  "format": "csv",
+  "encoding": "UTF-8",
+  "delimiter": ",",
+  "skipRows": 0,
+  "hasHeader": true,
+  "supportedExtensions": ["csv"],
+  "columns": {
+    "date": { "index": 8 },
+    "description": { "index": 14 },
+    "amount": { "index": 23 }
+  },
+  "filterYear": 2025,
+  "targetSheet": "Amazon",
+  "sheetLayout": "credit-card",
+  "hasOpeningBalance": false,
+  "defaultDebitAccount": "消耗品費",
+  "defaultCreditAccount": "未払金",
+  "defaultCreditSubAccount": "Amazonカード",
+  "mappingRules": []
+}

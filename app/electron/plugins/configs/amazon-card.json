@@ -1,0 +1,55 @@
+{
+  "id": "amazon-card",
+  "name": "Amazonカード",
+  "description": "Amazonマスターカード利用明細CSV",
+  "format": "csv",
+  "encoding": "Shift_JIS",
+  "delimiter": ",",
+  "skipRows": 1,
+  "hasHeader": false,
+  "supportedExtensions": [
+    "csv"
+  ],
+  "columns": {
+    "date": {
+      "index": 0
+    },
+    "description": {
+      "index": 1
+    },
+    "amount": {
+      "index": 2
+    }
+  },
+  "targetSheet": "Amazonカード",
+  "sheetLayout": "credit-card",
+  "defaultDebitAccount": "消耗品費",
+  "defaultCreditAccount": "未払金",
+  "defaultCreditSubAccount": "三井住友カード",
+  "mappingRules": [
+    {
+      "keyword": "AMAZON",
+      "debitAccount": "消耗品費"
+    },
+    {
+      "keyword": "インターネットイニシアティブ",
+      "debitAccount": "通信費"
+    },
+    {
+      "keyword": "ＡＳＡＨＩネット",
+      "debitAccount": "通信費"
+    },
+    {
+      "keyword": "ルネサンス",
+      "debitAccount": "福利厚生費"
+    },
+    {
+      "keyword": "メルカリ",
+      "debitAccount": "消耗品費"
+    }
+  ],
+  "hasOpeningBalance": false,
+  "shoppingPluginId": "amazon-orders",
+  "shoppingMatchKeywords": ["AMAZON", "アマゾン"],
+  "generatePaymentId": true
+}
