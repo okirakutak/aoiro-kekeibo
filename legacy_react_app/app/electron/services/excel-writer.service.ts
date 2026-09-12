@@ -683,3 +683,81 @@ export async function applyReconciliation(
   await workbook.xlsx.writeFile(excelPath)
   return processedCount
 }
+
+/**
+ * 調整仕訳（決算仕訳）の型定義
+ */
+export interface AdjustmentEntryItem {
+  date?: string
+  debitAccount: string
+  debitSubAccount?: string
+  creditAccount: string
+  creditSubAccount?: string
+  amount: number
+  description: string
+  note?: string
+}
+
+/**
+ * 仕訳帳シートに調整仕訳（決算仕訳）を追記する
+ */
+export async function addAdjustmentJournalEntry(
+  excelPath: string,
+  entry: AdjustmentEntryItem
+): Promise<boolean> {
+  const workbook = new ExcelJS.Workbook()
+  await workbook.xlsx.readFile(excelPath)
+
+  let sheet = workbook.getWorksheet('仕訳帳')
+  if (!sheet) {
+    sheet = workbook.addWorksheet('仕訳帳')
+    sheet.getRow(1).values = ['日付', '借方勘定科目', '借方補助科目', '借方金額', '摘要', '貸方勘定科目', '貸方補助科目', '貸方金額', '備考']
+    sheet.getRow(1).eachCell(cell => { cell.font = { bold: true } })
+  }
+
+  // 設定シートから対象年度を取得
+  let year = new Date().getFullYear()
+  const settingsSheet = workbook.getWorksheet('設定')
+  if (settingsSheet) {
+    const yearCell = settingsSheet.getRow(1).getCell(2).text.trim()
+    const parsedYear = parseInt(yearCell, 10)
+    if (!isNaN(parsedYear)) year = parsedYear
+  }
+
+  const safeDate = entry.date ? new Date(entry.date) : new Date(year, 11, 31, 12, 0, 0)
+  safeDate.setHours(12, 0, 0, 0)
+
+  // 実際にデータが存在する最下行を特定する
+  let lastDataRow = 1
+  sheet.eachRow((row, rowNumber) => {
+    if (rowNumber === 1) return
+    const cell1 = row.getCell(1).value
+    const cell2 = row.getCell(2).value
+    const cell5 = row.getCell(5).value
+    if (cell1 || cell2 || cell5) {
+      if (rowNumber > lastDataRow) {
+        lastDataRow = rowNumber
+      }
+    }
+  })
+
+  // 最下行の下に1行空行を挟んで仕訳を追記
+  const targetRowIndex = lastDataRow + 2
+  const nextRow = sheet.getRow(targetRowIndex)
+  nextRow.getCell(1).value = safeDate
+  nextRow.getCell(1).numFmt = 'YYYY/MM/DD'
+  nextRow.getCell(2).value = entry.debitAccount
+  nextRow.getCell(3).value = entry.debitSubAccount || null
+  nextRow.getCell(4).value = entry.amount
+  nextRow.getCell(4).numFmt = '#,##0'
+  nextRow.getCell(5).value = entry.description || '期末残高差額調整'
+  nextRow.getCell(6).value = entry.creditAccount
+  nextRow.getCell(7).value = entry.creditSubAccount || null
+  nextRow.getCell(8).value = entry.amount
+  nextRow.getCell(8).numFmt = '#,##0'
+  nextRow.getCell(9).value = entry.note || '期末残高調整'
+
+  await workbook.xlsx.writeFile(excelPath)
+  return true
+}
+

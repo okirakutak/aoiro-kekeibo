@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="700.0" prefWidth="1000.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aoiro.MainController">
+   <!-- 左側サイドバー -->
+   <left>
+      <VBox prefWidth="240.0" styleClass="sidebar" BorderPane.alignment="CENTER">
+         <children>
+            <!-- サイドバーヘッダー -->
+            <VBox styleClass="sidebar-header">
+               <children>
+                  <Label styleClass="sidebar-title" text="青色申告 MVP" />
+               </children>
+            </VBox>
+            <!-- メニューリスト -->
+            <VBox spacing="4.0" VBox.vgrow="ALWAYS">
+               <padding>
+                  <Insets top="16.0" />
+               </padding>
+               <children>
+                  <Button maxWidth="1.7976931348623157E308" styleClass="nav-button, active" text="📖 仕訳帳" />
+                  <Button maxWidth="1.7976931348623157E308" styleClass="nav-button" text="📒 総勘定元帳" />
+                  <Button maxWidth="1.7976931348623157E308" styleClass="nav-button" text="📊 損益計算書 (PL)" />
+                  <Button maxWidth="1.7976931348623157E308" styleClass="nav-button" text="⚖️ 貸借対照表 (BS)" />
+                  <Button maxWidth="1.7976931348623157E308" styleClass="nav-button" text="📥 データインポート" />
+                  <Button maxWidth="1.7976931348623157E308" styleClass="nav-button" text="🏷️ 科目一括設定" />
+                  <Button maxWidth="1.7976931348623157E308" styleClass="nav-button" text="🔍 期末残高チェック" />
+                  <Button maxWidth="1.7976931348623157E308" styleClass="nav-button" text="🔍 検証（やよい比較）" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </left>
+
+   <!-- 中央メインコンテンツエリア -->
+   <center>
+      <VBox spacing="32.0" styleClass="main-content" BorderPane.alignment="CENTER">
+         <children>
+            <!-- ダッシュボードヘッダー -->
+            <HBox alignment="CENTER_LEFT" spacing="12.0">
+               <children>
+                  <VBox spacing="4.0">
+                     <children>
+                        <Label styleClass="header-title" text="Dashboard" />
+                        <Label styleClass="header-subtitle" text="青色申告データ管理" />
+                     </children>
+                  </VBox>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button styleClass="btn-primary" text="Open Excel File" />
+                  <Button styleClass="btn-secondary" text="やよいインポート" />
+               </children>
+            </HBox>
+
+            <!-- 未読込時表示パネル -->
+            <VBox alignment="CENTER" spacing="16.0" styleClass="empty-card" VBox.vgrow="ALWAYS">
+               <children>
+                  <Label styleClass="empty-card-title" text="データソースを選択してください" />
+                  <Label styleClass="empty-card-desc" text="「Open Excel File」で自作Excelを読み込むか、&#10;「やよいインポート」でやよいの仕訳日記帳を読み込めます。" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

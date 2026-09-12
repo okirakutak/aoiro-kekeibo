@@ -123,6 +123,11 @@ export default function ReconciliationPanel({ entries, ledgers = [], accounts: _
   const [selectedLeftIds, setSelectedLeftIds] = useState<Set<string>>(new Set())
   const [selectedRightIds, setSelectedRightIds] = useState<Set<string>>(new Set())
 
+  // 期末実残高調整用の状態
+  const [actualBalanceInput, setActualBalanceInput] = useState<string>('')
+  const [offsetAccountType, setOffsetAccountType] = useState<'支払手数料' | '事業主借'>('支払手数料')
+  const [isAdjusting, setIsAdjusting] = useState<boolean>(false)
+
   // インポート設定（設定シートの各行設定）の取得
   useEffect(() => {
     const loadTargets = async () => {
@@ -672,6 +677,94 @@ export default function ReconciliationPanel({ entries, ledgers = [], accounts: _
     }
   }
 
+  // 帳簿残高（負債・資産等の科目特性に合わせて絶対値で計算）
+  const rawClosingBalance = currentLedger ? currentLedger.closingBalance : 0
+  const bookClosingBalance = isLiability ? Math.abs(rawClosingBalance) : rawClosingBalance
+
+  // 実残高と差額の数値計算
+  const parsedActualBalance = actualBalanceInput.trim() !== '' ? parseInt(actualBalanceInput.replace(/,/g, ''), 10) : null
+  const diffBalance = parsedActualBalance !== null && !isNaN(parsedActualBalance)
+    ? bookClosingBalance - parsedActualBalance
+    : null
+
+  // 科目が変わった時に実残高入力欄をクリア
+  useEffect(() => {
+    setActualBalanceInput('')
+  }, [selectedLedgerKey])
+
+  // 差額調整仕訳の追加ハンドラ
+  const handleAddAdjustmentEntry = async () => {
+    if (diffBalance === null || diffBalance === 0) {
+      alert('実残高を入力し、帳簿残高との差額がある場合に実行できます。')
+      return
+    }
+
+    if (!selectedAccount) {
+      alert('対象科目が選択されていません。')
+      return
+    }
+
+    const absDiff = Math.abs(diffBalance)
+    let debitAcc = ''
+    let debitSub: string | undefined = undefined
+    let creditAcc = ''
+    let creditSub: string | undefined = undefined
+
+    const selectedOffsetAcc = (diffBalance < 0 && offsetAccountType === '事業主借') ? '事業主貸' : offsetAccountType
+
+    if (diffBalance > 0) {
+      // 帳簿残高 > 実残高: 未払金を減らして実残高に合わせる（貸方に未払金を配置して残高を引き下げる）
+      debitAcc = selectedOffsetAcc
+      debitSub = undefined
+      creditAcc = selectedAccount
+      creditSub = selectedSubAccount
+    } else {
+      // 帳簿残高 < 実残高: 未払金を増やして実残高に合わせる（借方に未払金を配置して残高を引き上げる）
+      debitAcc = selectedAccount
+      debitSub = selectedSubAccount
+      creditAcc = selectedOffsetAcc
+      creditSub = undefined
+    }
+
+    const subNameLabel = selectedSubAccount ? `::${selectedSubAccount}` : ''
+    const confirmMsg = `【期末残高 差額調整仕訳の作成】\n\n` +
+      `帳簿残高: ¥${bookClosingBalance.toLocaleString()}\n` +
+      `実残高: ¥${parsedActualBalance?.toLocaleString()}\n` +
+      `差額: ¥${absDiff.toLocaleString()}\n\n` +
+      `以下の仕訳を12/31日付で「仕訳帳」に追加しますか？\n\n` +
+      `借方: ${debitAcc}${debitSub ? ` (${debitSub})` : ''}  ¥${absDiff.toLocaleString()}\n` +
+      `貸方: ${creditAcc}${creditSub ? ` (${creditSub})` : ''}  ¥${absDiff.toLocaleString()}\n` +
+      `摘要: 期末残高差額調整 (${selectedAccount}${subNameLabel})`
+
+    if (!window.confirm(confirmMsg)) return
+
+    setIsAdjusting(true)
+    try {
+      // @ts-ignore
+      const res = await window.electronAPI.addAdjustmentEntry({
+        debitAccount: debitAcc,
+        debitSubAccount: debitSub,
+        creditAccount: creditAcc,
+        creditSubAccount: creditSub,
+        amount: absDiff,
+        description: `期末残高差額調整 (${selectedAccount}${subNameLabel})`,
+        note: '期末残高差額調整仕訳'
+      })
+
+      if (res && res.success) {
+        await onReload()
+        setReconcileResult(`✅ 差額調整仕訳（¥${absDiff.toLocaleString()}）を仕訳帳に追加しました`)
+        setActualBalanceInput('')
+      } else {
+        alert('❌ 調整仕訳の追加に失敗しました: ' + (res?.error || '不明なエラー'))
+      }
+    } catch (err: any) {
+      alert('❌ エラー: ' + err.message)
+    } finally {
+      setIsAdjusting(false)
+    }
+  }
+
   // ============================================================
   // 表示フィルタリング（突合済み非表示チェックボックスに連動）
   // ============================================================
@@ -840,6 +933,115 @@ export default function ReconciliationPanel({ entries, ledgers = [], accounts: _
           </div>
         </div>
       </div>
+
+      {/* 期末実残高の入力と差額調整仕訳追加エリア（クレジットカードモードのみ） */}
+      {isCreditCardCheckMode && (
+        <div style={{
+          backgroundColor: 'var(--bg-panel)',
+          padding: '16px 20px',
+          borderRadius: '12px',
+          border: '1px solid var(--border)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '12px'
+        }}>
+          <div style={{ fontWeight: 'bold', fontSize: '1rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span>⚖️ 期末実残高との差額調整</span>
+            <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 'normal' }}>
+              （WEB明細等で確認した12/31時点の実残高を入力し、差額の調整仕訳を作成します）
+            </span>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '20px' }}>
+            {/* 帳簿残高表示 */}
+            <div style={{ fontSize: '0.95rem' }}>
+              帳簿残高: <strong style={{ color: 'var(--accent)', fontSize: '1.05rem' }}>¥ {bookClosingBalance.toLocaleString()}</strong>
+            </div>
+
+            {/* 実残高入力 */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <label style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>12/31実残高:</label>
+              <input
+                type="text"
+                value={actualBalanceInput}
+                onChange={(e) => setActualBalanceInput(e.target.value)}
+                placeholder="例: 120000"
+                style={{
+                  padding: '8px 12px',
+                  borderRadius: '6px',
+                  border: '1px solid var(--border)',
+                  backgroundColor: 'var(--bg-base)',
+                  color: 'var(--text-primary)',
+                  width: '140px',
+                  fontWeight: 'bold',
+                  textAlign: 'right'
+                }}
+              />
+              <span style={{ fontSize: '0.9rem' }}>円</span>
+            </div>
+
+            {/* 差額表示 */}
+            {diffBalance !== null && (
+              <div style={{
+                padding: '6px 12px',
+                borderRadius: '6px',
+                backgroundColor: diffBalance === 0 ? 'rgba(76, 175, 80, 0.1)' : 'rgba(239, 68, 68, 0.1)',
+                border: `1px solid ${diffBalance === 0 ? 'rgba(76, 175, 80, 0.3)' : 'rgba(239, 68, 68, 0.3)'}`,
+                fontSize: '0.95rem',
+                fontWeight: 'bold',
+                color: diffBalance === 0 ? '#10b981' : '#ef4444'
+              }}>
+                {diffBalance === 0 ? '✅ 差額なし (一致)' : `⚠️ 差額: ¥ ${Math.abs(diffBalance).toLocaleString()} (${diffBalance > 0 ? '帳簿超過' : '帳簿不足'})`}
+              </div>
+            )}
+
+            {/* 相手科目選択 (差額がある場合のみ有効) */}
+            {diffBalance !== null && diffBalance !== 0 && (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <label style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>相手科目:</label>
+                <select
+                  value={offsetAccountType}
+                  onChange={(e) => setOffsetAccountType(e.target.value as any)}
+                  style={{
+                    padding: '8px 12px',
+                    borderRadius: '6px',
+                    border: '1px solid var(--border)',
+                    backgroundColor: 'var(--bg-base)',
+                    color: 'var(--text-primary)',
+                    fontWeight: 'bold'
+                  }}
+                >
+                  <option value="支払手数料">支払手数料 (金利・利息・手数料)</option>
+                  <option value="事業主借">事業主借 / 事業主貸 (繰越誤差・個人間調整)</option>
+                </select>
+              </div>
+            )}
+
+            {/* 仕訳追加ボタン */}
+            {diffBalance !== null && diffBalance !== 0 && (
+              <button
+                onClick={handleAddAdjustmentEntry}
+                disabled={isAdjusting}
+                style={{
+                  padding: '8px 20px',
+                  backgroundColor: '#8b5cf6',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '6px',
+                  fontWeight: 'bold',
+                  cursor: isAdjusting ? 'not-allowed' : 'pointer',
+                  opacity: isAdjusting ? 0.7 : 1,
+                  boxShadow: '0 2px 4px rgba(139, 92, 246, 0.2)',
+                  transition: 'all 0.2s'
+                }}
+              >
+                {isAdjusting ? '処理中...' : '調整仕訳を仕訳帳に追加'}
+              </button>
+            )}
+          </div>
+        </div>
+      )}
+
 
       {/* コントロールバー（チェックボックス + 突合結果メッセージ） */}
       {!isCreditCardCheckMode && (

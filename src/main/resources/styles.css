@@ -1,0 +1,119 @@
+.root {
+    -fx-base: #1e1e24;
+    -fx-background-color: #1e1e24;
+    -fx-font-family: "Segoe UI", "Inter", "Helvetica Neue", sans-serif;
+}
+
+/* サイドバー */
+.sidebar {
+    -fx-background-color: #2b2b36;
+    -fx-border-color: transparent #3f3f4e transparent transparent;
+    -fx-border-width: 0 1 0 0;
+}
+
+.sidebar-header {
+    -fx-padding: 24 20 24 20;
+    -fx-border-color: transparent transparent #3f3f4e transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.sidebar-title {
+    -fx-text-fill: #6c63ff;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+/* サイドバーボタン */
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #a0a0b0;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 14 20;
+    -fx-font-size: 14px;
+    -fx-background-radius: 0;
+    -fx-border-color: transparent transparent transparent transparent;
+    -fx-border-width: 0 0 0 4;
+    -fx-cursor: hand;
+}
+
+.nav-button:hover {
+    -fx-background-color: #3a3a48;
+    -fx-text-fill: #f0f0f5;
+}
+
+.nav-button.active {
+    -fx-background-color: #3a3a48;
+    -fx-text-fill: #f0f0f5;
+    -fx-border-color: transparent transparent transparent #6c63ff;
+    -fx-border-width: 0 0 0 4;
+}
+
+/* メインコンテンツエリア */
+.main-content {
+    -fx-background-color: #1e1e24;
+    -fx-padding: 32;
+}
+
+/* ヘッダー */
+.header-title {
+    -fx-text-fill: #f0f0f5;
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+}
+
+.header-subtitle {
+    -fx-text-fill: #a0a0b0;
+    -fx-font-size: 14px;
+}
+
+/* プライマリボタン */
+.btn-primary {
+    -fx-background-color: #6c63ff;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-padding: 8 16;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.btn-primary:hover {
+    -fx-background-color: #5a52e0;
+}
+
+/* セカンダリボタン (やよいインポート) */
+.btn-secondary {
+    -fx-background-color: #2a5a8a;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-padding: 8 16;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.btn-secondary:hover {
+    -fx-background-color: #22486f;
+}
+
+/* 空状態のメッセージカード */
+.empty-card {
+    -fx-background-color: #2b2b36;
+    -fx-border-color: #3f3f4e;
+    -fx-border-style: segments(5, 5);
+    -fx-border-width: 1;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-padding: 64 32;
+    -fx-alignment: CENTER;
+}
+
+.empty-card-title {
+    -fx-text-fill: #f0f0f5;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.empty-card-desc {
+    -fx-text-fill: #a0a0b0;
+    -fx-font-size: 14px;
+    -fx-text-alignment: center;
+}

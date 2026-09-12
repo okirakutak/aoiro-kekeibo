@@ -29,4 +29,5 @@ contextBridge.exposeInMainWorld('electronAPI', {
   updateRowFields: (sheetName: string, searchTx: { date: string; description: string; amount: number }, updateFields: { amount?: number; memo?: string }) => ipcRenderer.invoke('update-row-fields', sheetName, searchTx, updateFields),
   // 突合結果のExcel書き込み
   applyReconciliation: (items: any[]) => ipcRenderer.invoke('apply-reconciliation', items),
+  addAdjustmentEntry: (entry: any) => ipcRenderer.invoke('add-adjustment-entry', entry),
 })

@@ -7,7 +7,7 @@ import { generateLedgers, generatePL, generateBS } from './services/accounting.s
 import { importYayoiJournal, importYayoiTrialBalance } from './services/yayoi.service'
 import { pluginManager } from './services/plugin-manager'
 import { parseFiles, createPluginFromConfig } from './services/config-parser-engine'
-import { writeTransactionsToSheet, updateRowFields, applyReconciliation } from './services/excel-writer.service'
+import { writeTransactionsToSheet, updateRowFields, applyReconciliation, addAdjustmentJournalEntry } from './services/excel-writer.service'
 
 // ※ プラグインのJSON設定はExcelの「設定」シートから動的に読み込むように移行しました
 
@@ -455,6 +455,18 @@ function createWindow() {
     try {
       const count = await applyReconciliation(lastExcelPath, items)
       return { success: true, data: { count } }
+    } catch (error: any) {
+      console.error(error)
+      return { success: false, error: error.message }
+    }
+  })
+
+  // 調整仕訳（決算仕訳）をExcelに書き込む
+  ipcMain.handle('add-adjustment-entry', async (_, entry: any) => {
+    if (!lastExcelPath) return { success: false, error: 'Excelファイルが読み込まれていません。' }
+    try {
+      await addAdjustmentJournalEntry(lastExcelPath, entry)
+      return { success: true }
     } catch (error: any) {
       console.error(error)
       return { success: false, error: error.message }
