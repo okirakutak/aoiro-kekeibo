@@ -16,3 +16,7 @@ app/dist-electron/
 # ログファイル・一時ファイル
 *.log
 .DS_Store
+
+# Gradle Kotlin ビルド成果物
+build/
+.gradle/

@@ -19,7 +19,7 @@
 
 .sidebar-title {
     -fx-text-fill: #6c63ff;
-    -fx-font-size: 18px;
+    -fx-font-size: 20px;
     -fx-font-weight: bold;
 }
 
@@ -28,8 +28,8 @@
     -fx-background-color: transparent;
     -fx-text-fill: #a0a0b0;
     -fx-alignment: CENTER_LEFT;
-    -fx-padding: 14 20;
-    -fx-font-size: 14px;
+    -fx-padding: 16 22;
+    -fx-font-size: 16px;
     -fx-background-radius: 0;
     -fx-border-color: transparent transparent transparent transparent;
     -fx-border-width: 0 0 0 4;
@@ -51,19 +51,8 @@
 /* メインコンテンツエリア */
 .main-content {
     -fx-background-color: #1e1e24;
-    -fx-padding: 32;
-}
-
-/* ヘッダー */
-.header-title {
-    -fx-text-fill: #f0f0f5;
-    -fx-font-size: 26px;
-    -fx-font-weight: bold;
-}
-
-.header-subtitle {
-    -fx-text-fill: #a0a0b0;
-    -fx-font-size: 14px;
+    -fx-padding: 36;
+    -fx-font-size: 16px;
 }
 
 /* プライマリボタン */
@@ -108,12 +97,220 @@
 
 .empty-card-title {
     -fx-text-fill: #f0f0f5;
-    -fx-font-size: 20px;
+    -fx-font-size: 22px;
     -fx-font-weight: bold;
 }
 
 .empty-card-desc {
     -fx-text-fill: #a0a0b0;
-    -fx-font-size: 14px;
+    -fx-font-size: 16px;
     -fx-text-alignment: center;
+}
+
+/* TableView スタイル */
+.table-view {
+    -fx-background-color: #2b2b36;
+    -fx-border-color: #3f3f4e;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #22222b;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent #3f3f4e transparent;
+    -fx-padding: 10 12;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #a0a0b0;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: #2b2b36;
+    -fx-border-color: transparent transparent #3f3f4e transparent;
+    -fx-text-fill: #f0f0f5;
+}
+
+.table-view .table-row-cell:hover {
+    -fx-background-color: #3a3a48;
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: #4a4a5c;
+}
+
+.table-view .table-cell {
+    -fx-text-fill: #f0f0f5;
+    -fx-padding: 10 14;
+    -fx-font-size: 16px;
+}
+
+.table-cell-amount {
+    -fx-alignment: CENTER-RIGHT;
+    -fx-font-family: "Monospaced", monospace;
+    -fx-font-size: 16px;
+}
+
+/* ComboBox スタイル */
+.combo-box {
+    -fx-background-color: #2b2b36;
+    -fx-border-color: #3f3f4e;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 4 8;
+}
+
+.combo-box .label {
+    -fx-text-fill: #f0f0f5;
+    -fx-font-size: 16px;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: #2b2b36;
+    -fx-border-color: #3f3f4e;
+}
+
+.combo-box-popup .list-cell {
+    -fx-text-fill: #f0f0f5;
+    -fx-padding: 8 12;
+    -fx-background-color: #2b2b36;
+}
+
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: #3a3a48;
+}
+
+/* 元帳サマリーパネル */
+.summary-panel {
+    -fx-background-color: #22222b;
+    -fx-border-color: #3f3f4e;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 12 20;
+}
+
+.summary-label {
+    -fx-text-fill: #f0f0f5;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.summary-value {
+    -fx-text-fill: #6c63ff;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Monospaced", monospace;
+}
+
+/* 財務レポート (PL / BS) スタイル */
+.report-section-header {
+    -fx-background-color: #22222b;
+    -fx-border-color: #3f3f4e;
+    -fx-border-width: 1 1 0 1;
+    -fx-border-radius: 8 8 0 0;
+    -fx-background-radius: 8 8 0 0;
+    -fx-padding: 12 16;
+}
+
+.report-section-title {
+    -fx-text-fill: #f0f0f5;
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+}
+
+.text-profit {
+    -fx-text-fill: #4caf50;
+    -fx-font-weight: bold;
+}
+
+/* ラジオボタン (データインポート画面) */
+.radio-button {
+    -fx-text-fill: #f0f0f5;
+    -fx-font-size: 14px;
+}
+
+.radio-button .radio {
+    -fx-background-color: #2b2b36;
+    -fx-border-color: #6c63ff;
+    -fx-border-width: 2;
+    -fx-background-radius: 100;
+    -fx-border-radius: 100;
+    -fx-padding: 3;
+}
+
+.radio-button .radio .dot {
+    -fx-background-color: transparent;
+    -fx-background-radius: 100;
+}
+
+.radio-button:selected .radio {
+    -fx-background-color: #2b2b36;
+    -fx-border-color: #6c63ff;
+}
+
+.radio-button:selected .radio .dot {
+    -fx-background-color: #6c63ff;
+}
+
+.radio-button:hover .radio {
+    -fx-border-color: #8a83ff;
+}
+
+.text-loss {
+    -fx-text-fill: #f44336;
+    -fx-font-weight: bold;
+}
+
+.text-success {
+    -fx-text-fill: #4caf50;
+    -fx-font-weight: bold;
+}
+
+.text-warning {
+    -fx-text-fill: #ff9800;
+    -fx-font-weight: bold;
+}
+
+/* ワークシート一覧 (他パネルと統一したダークテーマ) */
+.list-view {
+    -fx-background-color: #22222b;
+    -fx-border-color: #3f3f4e;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 4;
+}
+
+.list-view .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #f0f0f5;
+    -fx-font-size: 16px;
+    -fx-padding: 10 14;
+    -fx-background-radius: 6;
+}
+
+.list-view .list-cell:hover {
+    -fx-background-color: #3a3a48;
+}
+
+.list-view .list-cell:selected {
+    -fx-background-color: #4a4a5c;
+    -fx-text-fill: #f0f0f5;
+}
+
+.list-view .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+/* インポート設定の説明文 (左寄せ) */
+.import-desc {
+    -fx-text-fill: #a0a0b0;
+    -fx-font-size: 16px;
+    -fx-text-alignment: left;
+    -fx-alignment: top-left;
 }

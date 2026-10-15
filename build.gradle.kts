@@ -22,6 +22,16 @@ javafx {
 
 dependencies {
     implementation(kotlin("stdlib"))
+    implementation("org.apache.poi:poi-ooxml:5.2.5")
+    // データインポート機能用（legacy React アプリの移植）
+    implementation("org.jsoup:jsoup:1.15.3")
+    implementation("com.google.code.gson:gson:2.10.1")
+    testImplementation(kotlin("test"))
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
 
 application {
