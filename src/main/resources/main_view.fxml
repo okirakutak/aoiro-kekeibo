@@ -259,10 +259,20 @@
                                           <Label fx:id="lblImportInfo" styleClass="empty-card-desc" text="" wrapText="true" visible="false" />
                                           <VBox fx:id="importSetupCard" spacing="16.0" styleClass="summary-panel">
                                              <children>
-                                                <Label fx:id="lblImportSheetName" styleClass="summary-label" text="" wrapText="true" />
+                                                <HBox alignment="CENTER_LEFT" spacing="12.0">
+                                                   <children>
+                                                      <Label fx:id="lblImportSheetName" styleClass="summary-label" text="" wrapText="true" />
+                                                      <Region HBox.hgrow="ALWAYS" />
+                                                      <Label fx:id="lblImportAccount" styleClass="import-account" text="" />
+                                                   </children>
+                                                </HBox>
                                                 <Label fx:id="lblImportStatus" styleClass="text-success" text="" wrapText="true" />
                                                 <Label fx:id="lblImportJsonDetail" alignment="TOP_LEFT" maxWidth="Infinity" styleClass="import-desc" text="" wrapText="true" />
-                                                <Label fx:id="lblImportWarningDesc" alignment="TOP_LEFT" maxWidth="Infinity" styleClass="import-desc" text="" wrapText="true" visible="false" />
+                                                <Label fx:id="lblImportWarningDesc" alignment="TOP_LEFT" maxWidth="Infinity" styleClass="import-desc" text="" wrapText="true" visible="false" managed="false">
+                                                   <VBox.margin>
+                                                      <Insets top="6.0" />
+                                                   </VBox.margin>
+                                                </Label>
                                                 <HBox fx:id="importFormatBox" spacing="24.0" visible="false">
                                                    <children>
                                                       <VBox spacing="8.0">
@@ -283,8 +293,8 @@
                                                 </HBox>
                                                 <HBox spacing="12.0">
                                                    <children>
-                                                      <Button fx:id="btnImportPreview" onAction="#handleImportPreview" styleClass="btn-primary" text="ファイルを選択してインポート (複数可)" visible="false" />
-                                                      <Button fx:id="btnImportExtract" onAction="#handleImportExtract" styleClass="btn-primary" text="ファイルを選択してテキスト抽出" visible="false" />
+                                                      <Button fx:id="btnImportPreview" onAction="#handleImportPreview" styleClass="btn-primary" text="ファイルを選択してインポート (複数可)" visible="false" managed="false" />
+                                                      <Button fx:id="btnImportExtract" onAction="#handleImportExtract" styleClass="btn-primary" text="ファイルを選択してテキスト抽出" visible="false" managed="false" />
                                                    </children>
                                                 </HBox>
                                              </children>

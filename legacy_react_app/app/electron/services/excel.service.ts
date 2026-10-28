@@ -394,8 +394,8 @@ export async function loadJournalEntries(filePath: string): Promise<JournalEntry
       
       if (!account) return // 勘定科目が空の行はスキップ
       
-      // シート名がある行 → 読み込み対象シートとして登録
-      if (sheetName) {
+      // シート名がある行 → 読み込み対象シートとして登録（重複追加を防止）
+      if (sheetName && !targetSheets.some(t => t.name === sheetName)) {
         targetSheets.push({
           name: sheetName,
           defaultCredit: account,

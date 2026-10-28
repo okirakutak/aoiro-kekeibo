@@ -159,7 +159,8 @@ export function generateBS(ledgers: AccountLedger[], netIncome: number, accounts
     const type = getAccountType(l.accountName, accounts)
     if (type === '資産') return true
     if (!type) return l.accountName === '現金' || l.accountName === '普通預金' || 
-      l.accountName === '売掛金' || l.accountName === '事業主貸'
+      l.accountName === '売掛金' || l.accountName === '事業主貸' ||
+      l.accountName === '敷金' || l.accountName === '車両運搬具'
     return false
   })
   

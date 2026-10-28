@@ -3,7 +3,10 @@ package com.example.aoiro.service
 import com.example.aoiro.model.*
 import org.jsoup.Jsoup
 import java.io.File
+import java.nio.ByteBuffer
+import java.nio.charset.CharacterCodingException
 import java.nio.charset.Charset
+import java.nio.charset.CodingErrorAction
 import java.nio.file.Files
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -12,15 +15,31 @@ import java.util.UUID
 // 汎用パーサーエンジン（config-parser-engine.ts の Kotlin 移植）
 object ImportParserService {
 
+    // 指定文字コードで厳密にデコードする（不正バイト・未定義文字は例外にする）
+    // String(bytes, charset) だと不正バイトが黙って U+FFFD(�) に置換されてしまうため、
+    // 文字化けを検出できるように REPORT を指定する
+    private fun decodeStrict(bytes: ByteArray, charset: Charset): String =
+        charset.newDecoder()
+            .onMalformedInput(CodingErrorAction.REPORT)
+            .onUnmappableCharacter(CodingErrorAction.REPORT)
+            .decode(ByteBuffer.wrap(bytes))
+            .toString()
+
+    private fun stripBom(text: String): String =
+        if (text.isNotEmpty() && text[0] == '\uFEFF') text.substring(1) else text
+
     // ファイルを指定エンコーディングで読み込み、UTF-8文字列として返す（BOM除去付き）
     fun readFileWithEncoding(file: File, encoding: String): String {
         val bytes = Files.readAllBytes(file.toPath())
         val enc = encoding.trim().lowercase().replace("_", "").replace("-", "")
         return when (enc) {
             "utf8", "utf8n", "utf" -> {
-                var text = String(bytes, Charsets.UTF_8)
-                if (text.isNotEmpty() && text[0] == '\uFEFF') text = text.substring(1)
-                text
+                try {
+                    stripBom(decodeStrict(bytes, Charsets.UTF_8))
+                } catch (e: CharacterCodingException) {
+                    // 設定や既定値がUTF-8でも、実ファイルがShift_JIS(CP932)の場合は読み直す
+                    String(bytes, Charset.forName("Windows-31J"))
+                }
             }
             "shiftjis", "shift Jis", "sjis", "ms932", "windows31j", "windows932" -> {
                 String(bytes, Charset.forName("Windows-31J"))

@@ -90,6 +90,7 @@ class MainController {
     @FXML private lateinit var lblImportInfo: Label
     @FXML private lateinit var importSetupCard: VBox
     @FXML private lateinit var lblImportSheetName: Label
+    @FXML private lateinit var lblImportAccount: Label
     @FXML private lateinit var lblImportStatus: Label
     @FXML private lateinit var lblImportJsonDetail: Label
     @FXML private lateinit var lblImportWarningDesc: Label
@@ -414,6 +415,7 @@ class MainController {
         val excelFile = currentExcelFile
         if (excelFile == null) {
             lblImportInfo.isVisible = true
+            lblImportInfo.isManaged = true
             lblImportInfo.text = "先に「Open Excel File」でExcelファイルを読み込んでください。"
             importSetupCard.isVisible = false
             importSetupCard.isManaged = false
@@ -432,12 +434,14 @@ class MainController {
                 lstImportSheets.selectionModel.select(0)
             } else {
                 lblImportInfo.isVisible = true
+            lblImportInfo.isManaged = true
                 lblImportInfo.text = "対象となるワークシートがありません。"
                 importSetupCard.isVisible = false
                 importSetupCard.isManaged = false
             }
         } catch (e: Exception) {
             lblImportInfo.isVisible = true
+            lblImportInfo.isManaged = true
             lblImportInfo.text = "対象の取得に失敗しました: ${e.message}"
             importSetupCard.isVisible = false
             importSetupCard.isManaged = false
@@ -454,34 +458,44 @@ class MainController {
         lblImportPreviewCount.text = "インポートデータのプレビュー (0件)"
         // 対象が存在するためエラーラベルは隠してカードを表示する
         lblImportInfo.isVisible = false
+        lblImportInfo.isManaged = false
         importSetupCard.isVisible = true
         importSetupCard.isManaged = true
         lblImportSheetName.text = target.sheetName
+        val subAccount = target.subAccount?.takeIf { it.isNotEmpty() }?.let { "　対象補助科目: $it" } ?: ""
+        lblImportAccount.text = "対象科目: ${target.account}$subAccount"
         if (target.hasJson) {
             val cfg = target.jsonConfig
             lblImportStatus.styleClass.removeAll("text-warning")
             lblImportStatus.styleClass.add("text-success")
             lblImportStatus.text = "✓ インポート設定(JSON) 登録済み"
             lblImportJsonDetail.isVisible = true
-            lblImportJsonDetail.text = "対象形式: ${cfg?.format?.uppercase() ?: "CSV"}\nデフォルト勘定科目: ${cfg?.defaultDebitAccount ?: target.account}\n文字コード: ${cfg?.encoding ?: "UTF-8"}"
+            lblImportJsonDetail.isManaged = true
+            lblImportJsonDetail.text = "対象形式: ${cfg?.format?.uppercase() ?: "CSV"}\n文字コード: ${cfg?.encoding ?: "UTF-8"}"
             lblImportWarningDesc.isVisible = false
+            lblImportWarningDesc.isManaged = false
             importFormatBox.isVisible = false
             importFormatBox.isManaged = false
             btnImportPreview.isVisible = true
+            btnImportPreview.isManaged = true
             btnImportPreview.isDisable = false
             btnImportExtract.isVisible = false
+            btnImportExtract.isManaged = false
         } else {
-            val sub = if (!target.subAccount.isNullOrEmpty()) " / ${target.subAccount}" else ""
             lblImportStatus.styleClass.removeAll("text-success")
             lblImportStatus.styleClass.add("text-warning")
             lblImportStatus.text = "⚠️ インポート設定(JSON) 未登録"
             lblImportJsonDetail.isVisible = false
+            lblImportJsonDetail.isManaged = false
             lblImportWarningDesc.isVisible = true
-            lblImportWarningDesc.text = "設定がないため、AIを活用して自動化します。\n対象ファイルの形式と処理モードを選択してください。\n（対象科目: ${target.account}$sub）"
+            lblImportWarningDesc.isManaged = true
+            lblImportWarningDesc.text = "設定がないため、AIを活用して自動化します。\n対象ファイルの形式と処理モードを選択してください。"
             importFormatBox.isVisible = true
             importFormatBox.isManaged = true
             btnImportPreview.isVisible = false
+            btnImportPreview.isManaged = false
             btnImportExtract.isVisible = true
+            btnImportExtract.isManaged = true
             btnImportExtract.isDisable = false
         }
         importStep = "setup"

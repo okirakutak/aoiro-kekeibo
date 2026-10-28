@@ -314,3 +314,9 @@
     -fx-text-alignment: left;
     -fx-alignment: top-left;
 }
+
+/* インポート設定ヘッダ右側の対象科目表示 */
+.import-account {
+    -fx-text-fill: #a0a0b0;
+    -fx-font-size: 15px;
+}
