@@ -28,6 +28,9 @@ legacy_react_app/app/electron/**/*.js
 legacy_react_app/app/electron/**/*.js.map
 legacy_react_app/app/src/types/*.js
 
+# AIが生成した未使用のテスト（Gradleのソースセット外）
+src/main/test/
+
 # ツール・作業ファイル
 Screenshot*.png
 test_count.*
