@@ -1,11 +1,9 @@
 # 依存関係パッケージ（大容量のためリポジトリから除外）
 node_modules/
-app/node_modules/
 
 # ビルド成果物
 dist/
-app/dist/
-app/dist-electron/
+dist-electron/
 
 # エディタ・IDE・ツール設定フォルダ
 .idea/
@@ -20,3 +18,17 @@ app/dist-electron/
 # Gradle Kotlin ビルド成果物
 build/
 .gradle/
+
+# 会計データ（個人情報を含むため追跡しない）
+*.xlsx
+*.xls
+
+# 自動生成物（TypeScriptのコンパイル出力）
+legacy_react_app/app/electron/**/*.js
+legacy_react_app/app/electron/**/*.js.map
+legacy_react_app/app/src/types/*.js
+
+# ツール・作業ファイル
+Screenshot*.png
+test_count.*
+legacy_react_app/app/compare_reports.js
